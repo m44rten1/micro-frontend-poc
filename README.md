@@ -61,7 +61,8 @@ This keeps MFEs decoupled — they share event names and payload shapes, not cod
 
 ### 4. Data Ownership
 
-`mfe-todo-list` owns the todo domain. It holds the canonical list, exposes a REST API for other MFEs and the shell, and is the single source of truth. Other MFEs interact with todo data only through the API or events.
+`api-todo` owns the todo domain and is the single source of truth.
+MFEs interact with todos through the API; browser events are used only to coordinate UI updates (e.g. refetch / invalidate caches / update counts).
 
 ### 5. Shared Contracts, Not Shared Code
 
