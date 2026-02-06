@@ -8,15 +8,15 @@ A proof of concept demonstrating **server-side fragment composition** with **isl
 Browser request
        │
        ▼
-┌─────────────┐     fetch /fragment      ┌──────────────────┐
+┌─────────────┐     fetch /fragment       ┌──────────────────┐
 │             │ ◄──────────────────────── │  mfe-header      │ React 18
-│             │                           │  :3001            │
-│   Shell     │     fetch /fragment      ┌──────────────────┐
+│             │                           │  :3001           │
+│   Shell     │     fetch /fragment       ┌──────────────────┐
 │   :3000     │ ◄──────────────────────── │  mfe-create-todo │ Vue 3
-│  (Express)  │                           │  :3003            │
-│             │     fetch /fragment      ┌──────────────────┐
+│  (Express)  │                           │  :3003           │
+│             │     fetch /fragment       ┌──────────────────┐
 │             │ ◄──────────────────────── │  mfe-todo-list   │ Vue 3
-└──────┬──────┘                           │  :3002            │
+└──────┬──────┘                           │  :3002           │
        │                                  └──────────────────┘
        │  Composed HTML page                     │
        ▼                                         ▼
@@ -33,6 +33,7 @@ Browser request
 The **shell** acts as an edge composer. On each request it fetches HTML fragments from all micro-frontends in parallel, then stitches them into a single HTML page. The shell knows nothing about React or Vue — it deals in plain HTML strings.
 
 Each MFE exposes a `GET /fragment` endpoint that returns self-contained HTML including:
+
 - Server-rendered markup (`<div id="mfe-{name}">...</div>`)
 - Serialized state for hydration (`<script type="application/json">`)
 - A `<script>` tag pointing to its client bundle
@@ -51,10 +52,10 @@ Each micro-frontend hydrates only its own DOM subtree — an "island" of interac
 
 Micro-frontends communicate through browser `CustomEvent`s on `window`, with typed payloads defined in a shared contract package:
 
-| Event | Producer | Consumers | Purpose |
-|---|---|---|---|
+| Event          | Producer        | Consumers     | Purpose              |
+| -------------- | --------------- | ------------- | -------------------- |
 | `todo:created` | mfe-create-todo | mfe-todo-list | A new todo was added |
-| `todo:changed` | mfe-todo-list | mfe-header | Todo counts changed |
+| `todo:changed` | mfe-todo-list   | mfe-header    | Todo counts changed  |
 
 This keeps MFEs decoupled — they share event names and payload shapes, not code.
 
@@ -65,6 +66,7 @@ This keeps MFEs decoupled — they share event names and payload shapes, not cod
 ### 5. Shared Contracts, Not Shared Code
 
 The `@mfe/shared` workspace package contains only:
+
 - **TypeScript types** — `Todo`, event payloads
 - **Event name constants** — `TODO_CREATED`, `TODO_CHANGED`
 - **CSS custom properties** — shared visual identity
