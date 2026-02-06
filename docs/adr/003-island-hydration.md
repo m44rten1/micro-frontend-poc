@@ -14,11 +14,13 @@ IKEA avoids global hydration. Each page section hydrates only its own DOM island
 
 Each MFE hydrates **only its own DOM node**, identified by a unique element ID:
 
-| MFE | Framework | Container ID | Hydration API |
-|-----|-----------|-------------|---------------|
-| mfe-header | React 18 | `#mfe-header` | `hydrateRoot()` |
-| mfe-todo-list | Vue 3 | `#mfe-todo-list` | `createSSRApp().mount()` |
-| mfe-create-todo | Vue 3 | `#mfe-create-todo` | `createSSRApp().mount()` |
+
+| MFE             | Framework | Container ID       | Hydration API            |
+| --------------- | --------- | ------------------ | ------------------------ |
+| mfe-header      | React 18  | `#mfe-header`      | `hydrateRoot()`          |
+| mfe-todo-list   | Vue 3     | `#mfe-todo-list`   | `createSSRApp().mount()` |
+| mfe-create-todo | Vue 3     | `#mfe-create-todo` | `createSSRApp().mount()` |
+
 
 Each MFE's client bundle is loaded via its own `<script>` tag (included in the fragment response). When the script runs, it:
 
@@ -44,3 +46,4 @@ The key constraint: **no MFE touches DOM outside its own container.** Communicat
 - **No shared component tree.** You cannot use React Context or Vue provide/inject to pass data across MFE boundaries. Cross-MFE communication must use a different mechanism (ADR-004).
 - **Multiple framework runtimes in the browser.** The page loads both React and Vue. For this POC that's acceptable; at scale, teams typically converge on one or two frameworks to limit bundle overhead.
 - **Hydration mismatch risk per island.** Each MFE must ensure its client render matches its server render. The serialized JSON state bridge (`mfe-header-data`, `mfe-todo-list-data`) exists specifically to pass the same data to both SSR and hydration.
+

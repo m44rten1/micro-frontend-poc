@@ -33,13 +33,13 @@ Event name constants are defined in [shared/src/events.ts](shared/src/events.ts)
 
 The flow when a user creates a todo:
 
-1. `mfe-create-todo` POSTs to the todo-list API (`POST /api/todos`).
+1. `mfe-create-todo` POSTs to the todo API service (`POST /api/todos` on `api-todo`).
 2. On success, it dispatches `window.dispatchEvent(new CustomEvent('todo:created', { detail: { todo } }))`.
 3. `mfe-todo-list` listens for `todo:created`, adds the todo to its local state, and re-renders.
 4. `mfe-todo-list` dispatches `todo:changed` with the updated counts.
 5. `mfe-header` (React) listens for `todo:changed` and updates its badge via `setState`.
 
-See [mfe-todo-list/src/TodoList.ts](mfe-todo-list/src/TodoList.ts) lines 20-26 (`emitChanged`) and lines 48-52 (`handleTodoCreated`) for the implementation.
+See [mfe-todo-list/src/TodoList.vue](mfe-todo-list/src/TodoList.vue) (`emitChanged` and `handleTodoCreated` in the `<script setup>` block) for the implementation.
 
 ## Consequences
 
