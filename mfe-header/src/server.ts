@@ -18,13 +18,13 @@ app.get('/fragment', async (_req, res) => {
   let totalCount = 0;
 
   try {
-    const response = await fetch('http://localhost:3002/api/todos');
+    const response = await fetch('http://localhost:3004/api/todos');
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
     const data = await response.json() as { openCount: number; totalCount: number };
     openCount = data.openCount;
     totalCount = data.totalCount;
   } catch (err) {
-    console.warn('[mfe-header] Could not fetch todo counts from mfe-todo-list:', err);
+    console.warn('[mfe-header] Could not fetch todo counts from api-todo:', err);
   }
 
   const html = renderToString(
