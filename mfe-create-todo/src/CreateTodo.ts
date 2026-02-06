@@ -15,7 +15,7 @@ export default defineComponent({
 
       isSubmitting.value = true;
       try {
-        const res = await fetch('http://localhost:3002/api/todos', {
+        const res = await fetch('http://localhost:3004/api/todos', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ text: trimmed }),

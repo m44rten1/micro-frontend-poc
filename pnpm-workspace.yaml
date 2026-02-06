@@ -1,6 +1,7 @@
 packages:
   - shared
   - shell
+  - api-todo
   - mfe-header
   - mfe-todo-list
   - mfe-create-todo

@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "build": "pnpm --filter @mfe/shared run build && pnpm --filter './mfe-*' run build",
-    "dev": "pnpm --filter @mfe/shared run build && concurrently -k -n shell,header,list,create -c blue,green,yellow,magenta \"pnpm --filter shell run dev\" \"pnpm --filter mfe-header run dev\" \"pnpm --filter mfe-todo-list run dev\" \"pnpm --filter mfe-create-todo run dev\"",
+    "dev": "pnpm --filter @mfe/shared run build && concurrently -k -n shell,api,header,list,create -c blue,red,green,yellow,magenta \"pnpm --filter shell run dev\" \"pnpm --filter api-todo run dev\" \"pnpm --filter mfe-header run dev\" \"pnpm --filter mfe-todo-list run dev\" \"pnpm --filter mfe-create-todo run dev\"",
     "start": "pnpm run build && pnpm run dev"
   },
   "devDependencies": {

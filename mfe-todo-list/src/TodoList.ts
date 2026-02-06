@@ -35,7 +35,7 @@ export default defineComponent({
       emitChanged();
 
       try {
-        await fetch(`http://localhost:3002/api/todos/${id}/toggle`, { method: 'PATCH' });
+        await fetch(`http://localhost:3004/api/todos/${id}/toggle`, { method: 'PATCH' });
       } catch (err) {
         console.error('[mfe-todo-list] Toggle failed, reverting:', err);
         todo.done = !todo.done; // revert on failure

@@ -1,6 +1,6 @@
 import type { Todo } from '@mfe/shared/types';
 
-// ── In-memory todo store (owned by this micro-frontend) ──
+// ── In-memory todo store (owned by this API service) ──
 
 let nextId = 4;
 
