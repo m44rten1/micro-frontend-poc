@@ -3,7 +3,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { createSSRApp } from 'vue';
 import { renderToString } from 'vue/server-renderer';
-import CreateTodo from './CreateTodo.js';
+import CreateTodo from './CreateTodo.vue';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();

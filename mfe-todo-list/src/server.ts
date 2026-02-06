@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 import { createSSRApp } from 'vue';
 import { renderToString } from 'vue/server-renderer';
 import type { Todo } from '@mfe/shared/types';
-import TodoList from './TodoList.js';
+import TodoList from './TodoList.vue';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();

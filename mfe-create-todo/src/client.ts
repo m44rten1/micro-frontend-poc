@@ -1,5 +1,5 @@
 import { createSSRApp } from 'vue';
-import CreateTodo from './CreateTodo.js';
+import CreateTodo from './CreateTodo.vue';
 
 const container = document.getElementById('mfe-create-todo');
 if (container) {

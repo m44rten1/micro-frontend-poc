@@ -1,6 +1,6 @@
 import { createSSRApp } from 'vue';
 import type { Todo } from '@mfe/shared/types';
-import TodoList from './TodoList.js';
+import TodoList from './TodoList.vue';
 
 const container = document.getElementById('mfe-todo-list');
 if (container) {
