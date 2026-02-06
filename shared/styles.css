@@ -1,0 +1,224 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --color-primary: #0058a3;
+  --color-primary-hover: #004080;
+  --color-secondary: #ffdb00;
+  --color-bg: #f5f5f5;
+  --color-surface: #ffffff;
+  --color-text: #111111;
+  --color-text-secondary: #484848;
+  --color-text-muted: #929292;
+  --color-border: #dfdfdf;
+  --color-success: #0a8a00;
+  --color-danger: #e00751;
+
+  --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.5rem;
+
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  --max-width: 640px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Header (mfe-header) ── */
+
+.header {
+  background-color: var(--color-primary);
+  color: white;
+  padding: var(--spacing-md) var(--spacing-xl);
+  box-shadow: var(--shadow-md);
+}
+
+.header__inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__title {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.header__badge {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  background: rgba(255, 255, 255, 0.2);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-sm);
+}
+
+.header__count {
+  font-weight: 700;
+  font-size: var(--font-size-lg);
+}
+
+.header__label {
+  opacity: 0.9;
+}
+
+/* ── Layout ── */
+
+.main-content {
+  padding: var(--spacing-xl);
+}
+
+.app-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+/* ── Create Todo (mfe-create-todo) ── */
+
+.create-todo {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.create-todo__input {
+  flex: 1;
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  color: var(--color-text);
+  background: var(--color-surface);
+  transition: border-color 0.2s;
+  outline: none;
+}
+
+.create-todo__input:focus {
+  border-color: var(--color-primary);
+}
+
+.create-todo__input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.create-todo__button {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+
+.create-todo__button:hover {
+  background: var(--color-primary-hover);
+}
+
+.create-todo__button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ── Todo List (mfe-todo-list) ── */
+
+.todo-list__empty {
+  text-align: center;
+  color: var(--color-text-muted);
+  padding: var(--spacing-2xl);
+  font-size: var(--font-size-lg);
+}
+
+.todo-list__items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.todo-list__item {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  transition: background-color 0.15s;
+  box-shadow: var(--shadow-sm);
+}
+
+.todo-list__item:hover {
+  background: #fafafa;
+}
+
+.todo-list__label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) var(--spacing-lg);
+  cursor: pointer;
+  user-select: none;
+}
+
+.todo-list__checkbox {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--color-primary);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.todo-list__text {
+  font-size: var(--font-size-base);
+  transition: opacity 0.2s;
+}
+
+.todo-list__item--done .todo-list__text {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+/* ── Fragment fallback ── */
+
+.fragment-fallback {
+  padding: var(--spacing-lg);
+  text-align: center;
+  color: var(--color-text-muted);
+  font-style: italic;
+}

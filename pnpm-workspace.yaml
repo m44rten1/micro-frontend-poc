@@ -1,0 +1,6 @@
+packages:
+  - shared
+  - shell
+  - mfe-header
+  - mfe-todo-list
+  - mfe-create-todo
