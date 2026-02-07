@@ -2,6 +2,7 @@ packages:
   - shared
   - shell
   - api-todo
+  - registry
   - mfe-header
   - mfe-todo-list
   - mfe-create-todo

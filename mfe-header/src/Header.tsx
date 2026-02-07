@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
-import type { TodoChangedPayload } from '@mfe/shared/types';
-import { TODO_CHANGED } from '@mfe/shared/events';
+import { useState, useEffect } from "react";
+import type { TodoChangedPayload } from "@mfe/shared/types";
+import { TODO_CHANGED } from "@mfe/shared/events";
 
 export interface HeaderProps {
   initialOpenCount: number;
@@ -24,12 +24,10 @@ export function Header({ initialOpenCount, initialTotalCount }: HeaderProps) {
   return (
     <header className="header">
       <div className="header__inner">
-        <h1 className="header__title">Todo App</h1>
+        <h1 className="header__title">Todo App ✅</h1>
         <div className="header__badge">
           <span className="header__count">{openCount}</span>
-          <span className="header__label">
-            open of {totalCount}
-          </span>
+          <span className="header__label">open of {totalCount}</span>
         </div>
       </div>
     </header>

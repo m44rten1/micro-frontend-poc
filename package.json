@@ -4,8 +4,10 @@
   "type": "module",
   "scripts": {
     "build": "pnpm --filter @mfe/shared run build && pnpm --filter './mfe-*' run build",
-    "dev": "pnpm --filter @mfe/shared run build && concurrently -k -n shell,api,header,list,create -c blue,red,green,yellow,magenta \"pnpm --filter shell run dev\" \"pnpm --filter api-todo run dev\" \"pnpm --filter mfe-header run dev\" \"pnpm --filter mfe-todo-list run dev\" \"pnpm --filter mfe-create-todo run dev\"",
-    "start": "pnpm run build && pnpm run dev"
+    "publish:mfes": "pnpm --filter './mfe-*' run publish:mfe",
+    "dev": "pnpm --filter @mfe/shared run build && concurrently -k -n registry,api,shell -c cyan,red,blue \"pnpm --filter registry run dev\" \"pnpm --filter api-todo run dev\" \"pnpm --filter shell run dev\"",
+    "setup": "pnpm run build && pnpm run publish:mfes",
+    "start": "pnpm run setup && pnpm run dev"
   },
   "devDependencies": {
     "concurrently": "^9.0.0",
