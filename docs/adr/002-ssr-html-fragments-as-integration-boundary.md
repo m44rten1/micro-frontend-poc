@@ -14,19 +14,21 @@ IKEA chose option 3. Each page section (header, product content, recommendations
 
 ## Decision
 
-Each MFE exposes a `GET /fragment` endpoint that returns **rendered HTML + hydration assets**. The response is a plain text/html string containing:
+Each MFE exposes a `render()` function (in its server bundle) that returns **rendered HTML + hydration state**. The shell composes the full fragment by combining:
 
 1. A wrapping `<div>` with a unique ID (e.g., `<div id="mfe-header">...</div>`).
-2. Server-rendered HTML inside that div -- produced by the framework's SSR renderer (`renderToString` for React, `renderToString` from `vue/server-renderer` for Vue).
+2. Server-rendered HTML inside that div — produced by the framework's SSR renderer (`renderToString` for React, `renderToString` from `vue/server-renderer` for Vue).
 3. An optional `<script type="application/json">` block embedding serialized state for hydration.
-4. A `<script src="...">` tag pointing to the MFE's client bundle.
+4. A `<script src="...">` tag pointing to the MFE's client bundle on the registry.
 
-Example from [mfe-header/src/server.ts](mfe-header/src/server.ts):
+> **Note:** Originally each MFE exposed a `GET /fragment` HTTP endpoint from its own server. As of ADR-007, MFEs are published as self-contained bundles and the shell calls their `render()` functions in-process.
+
+Example output from [mfe-header/src/render.tsx](mfe-header/src/render.tsx):
 
 ```html
 <div id="mfe-header"><!-- SSR'd React HTML --></div>
 <script type="application/json" id="mfe-header-data">{"openCount":2,"totalCount":3}</script>
-<script src="http://localhost:3001/static/client.js"></script>
+<script src="http://localhost:3005/packages/header/1.0.0/client.js"></script>
 ```
 
 The shell injects these fragments into the page template verbatim. It never parses or transforms the fragment content.

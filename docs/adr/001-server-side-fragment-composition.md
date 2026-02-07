@@ -15,17 +15,19 @@ IKEA uses option 4 at scale: an edge/CDN layer (historically Akamai ESI, now als
 
 ## Decision
 
-We use **server-side fragment composition**. A shell service ([shell/src/server.ts](shell/src/server.ts)) acts as the edge composer:
+We use **server-side fragment composition**. A shell service ([shell/src/server.ts](shell/src/server.ts)) acts as the edge composer.
 
-- It fetches `GET /fragment` from each MFE service in parallel (`Promise.all`).
+> **Note:** The composition mechanism has evolved. Originally the shell fetched `GET /fragment` from per-MFE servers. As of ADR-007, MFEs are published to a registry as self-contained bundles, and the shell executes their `render()` functions in-process via `vm.compileFunction`. The architectural benefits below remain the same.
+
+- The shell calls each MFE's render function in parallel (`Promise.all`).
 - It stitches the returned HTML into a page template with shared CSS.
-- It applies a **2-second timeout per fragment** with static fallback HTML if a service is down or slow.
+- If a render function fails, the shell uses static fallback HTML so the page degrades gracefully.
 - The browser receives a single, fully composed HTML document.
 
 ```
-Browser  →  Shell (:3000)  →  mfe-header (:3001)   /fragment
-                            →  mfe-todo-list (:3002) /fragment
-                            →  mfe-create-todo (:3003) /fragment
+Browser  →  Shell (:3000)  →  render("header")      via server.cjs from Registry
+                            →  render("todoList")    via server.cjs from Registry
+                            →  render("createTodo")  via server.cjs from Registry
                             ←  composed HTML
 ```
 

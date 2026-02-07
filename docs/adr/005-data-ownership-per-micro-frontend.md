@@ -27,9 +27,9 @@ This separates data ownership from UI rendering. The MFEs are pure view services
 
 Other MFEs interact with the data through this API:
 
-- **`mfe-header`** calls `GET /api/todos` during SSR ([mfe-header/src/server.ts](mfe-header/src/server.ts)) to get the real open/total counts for server rendering.
+- **`mfe-header`** calls `GET /api/todos` during SSR ([mfe-header/src/render.tsx](mfe-header/src/render.tsx)) to get the real open/total counts for server rendering.
 - **`mfe-create-todo`** calls `POST /api/todos` from the browser ([mfe-create-todo/src/CreateTodo.vue](mfe-create-todo/src/CreateTodo.vue)) when the user submits the form.
-- **`mfe-todo-list`** calls `GET /api/todos` at SSR time ([mfe-todo-list/src/server.ts](mfe-todo-list/src/server.ts)) and `PATCH /api/todos/:id/toggle` from the browser for optimistic updates with server confirmation.
+- **`mfe-todo-list`** calls `GET /api/todos` at SSR time ([mfe-todo-list/src/render.ts](mfe-todo-list/src/render.ts)) and `PATCH /api/todos/:id/toggle` from the browser for optimistic updates with server confirmation.
 
 This means a full page reload always shows the current state of the data -- because MFEs SSR-render from the API, and the API is the single source of truth.
 
